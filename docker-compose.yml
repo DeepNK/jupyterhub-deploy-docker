@@ -9,8 +9,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.jupyterhub
-    image: jupyterhub
-    container_name: jupyterhub
+    image: deepnk/jupyterhub
+    container_name: ${DOCKER_MACHINE_NAME}
     volumes:
       # Bind Docker socket on the host so we can connect to the daemon from
       # within the container
@@ -31,7 +31,9 @@ services:
       # Required to authenticate users using GitHub OAuth
       GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
       GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
-      OAUTH_CALLBACK_URL: ${OAUTH_CALLBACK_URL}
+      OAUTH_CALLBACK_URL: ${OAUTH_CALLBACK_URL}  
+      # Use for inter-container communication
+      DOCKER_MACHINE_NAME: ${DOCKER_MACHINE_NAME}
     command: >
       jupyterhub -f /srv/jupyterhub/jupyterhub_config.py
 
