@@ -2,6 +2,9 @@ FROM jupyter/tensorflow-notebook
 
 USER jovyan
 
+# conda install --yes -c asmeurer pango
+# NOTE: http://stackoverflow.com/questions/40009184
+
 # Install Python 3 OpenCV 3.2.0
 RUN conda install --yes -c asmeurer pango && \
     conda install --yes -c menpo opencv3=3.2.0 && \
